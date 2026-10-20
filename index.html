@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <div class="logo">Kishan</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contacts">Contacts</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h2>Hi, I'm Kishan</h2>
+      <h2>Welcome to My Portfolio</h2>
+      <p>A Computer Science student learning web development.</p>
+      <button class="my-proj">My Projects</button>
+    </section>
+
+    
+    <section id="about">
+      <div class="abt-container">
+       <h2>About Me</h2>
+       <p>I am a second-year engineering student studying at Impact College of Engineering and Applied Sciences. I am learning web development and building my fundamentals.</p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>My Projects</h2>
+      <div class="project-container">
+        <a href="https://srisagardrivingschool.vercel.app/" target="_blank" class="project-card">
+          <h3>Sri Sagar Driving School</h3>
+          <p>This is a driving school website</p>
+        </a>
+        <div id="campus-nav-card" class="project-card">
+          <h3>CampusNav</h3>
+          <p>This is a campus navigation website</p>
+        </div>
+      </div>
+      <h2 class="up">Upcomming Project</h2>
+      <div id="issue-flow-ai" class="project-card">
+        <h3>Issue Flow AI</h3>
+        <p>A app where you can report issues. Used in apartments, offices, schools, colleges</p>
+      </div>
+    </section>
+    <section id="contacts">
+      <h2>Get in touch</h2>
+      <p>Fell free to reach out for collabrations or just a friendly chat!</p>
+      <div class="contact-links">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=your-k.i.s.h.a.n.n.8.0.0.5@gmail.com" target="_blank" class="contact-btn">
+        <img src="images/email.jpg" alt="Email" class="contact-icon">
+      </a>       
+      <a href="https://github.com/Kishan-N-Gowda" target="_blank" class="contact-btn">
+        <img src="images/github.png" alt="GitHub" class="contact-icon-git">
+      </a>
+      <a href="https://www.linkedin.com/in/kishan-n-gowda-47930b387/" target="_blank" class="contact-btn">
+        <img src="images/linkedin.jpg" alt="LinkedIn" class="contact-icon">
+      </a>
+
+      </div>
+    </section>
+
+   <script>
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault(); // Stop the instant jump
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                    const startPosition = window.pageYOffset;
+                    const distance = targetPosition - startPosition;
+                    const duration = 1200; // Duration in milliseconds (600ms = smooth & fast)
+                    let startTime = null;
+
+                    // Custom animation loop that bypasses browser restrictions
+                    function animation(currentTime) {
+                        if (startTime === null) startTime = currentTime;
+                        const timeElapsed = currentTime - startTime;
+                        const progress = Math.min(timeElapsed / duration, 1);
+                        
+                        // Easing function for a natural slow-down effect at the end
+                        const ease = t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+                        window.scrollTo(0, startPosition + (distance * ease(progress)));
+
+                        if (timeElapsed < duration) {
+                            requestAnimationFrame(animation);
+                        }
+                    }
+
+                    requestAnimationFrame(animation);
+                }
+            });
+        });
+
+        const projectBtn = document.querySelector('.my-proj');
+
+        const projectsSection = document.querySelector('#projects');
+
+        projectBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: projectsSection.offsetTop,
+                behavior: 'smooth'
+            });
+        });
+
+        const campusNavCard = document.querySelector('#campus-nav-card');
+
+        campusNavCard.addEventListener('click', function() {
+          window.open('https://campus-nav-iceas.vercel.app/', '_blank');
+        });
+
+        const issueFlowCard = document.querySelector('#issue-flow-ai');
+
+        issueFlowCard.addEventListener('click', function() {
+          alert("Project not yet finished!");
+        });
+    </script>
+  </body>
+</html>
