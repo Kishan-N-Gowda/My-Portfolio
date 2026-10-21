@@ -87,12 +87,13 @@
 
     <section id="contacts">
       <h2>Get in touch</h2>
-      <p>Feel free to reach out for collabrations or just a friendly chat!</p>
+      <p>Feel free to reach out for collaborations or just a friendly chat!</p>
       <div class="contact-links">
         <a
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=your-k.i.s.h.a.n.n.8.0.0.5@gmail.com"
+          href="mailto:k.i.s.h.a.n.n.8.0.0.5@gmail.com"
           target="_blank"
           class="contact-btn"
+          title="Send Email"
         >
           <img src="images/email.jpg" alt="Email" class="contact-icon" />
         </a>
@@ -100,6 +101,7 @@
           href="https://github.com/Kishan-N-Gowda"
           target="_blank"
           class="contact-btn"
+          title="GitHub Profile"
         >
           <img src="images/github.png" alt="GitHub" class="contact-icon-git" />
         </a>
@@ -107,6 +109,7 @@
           href="https://www.linkedin.com/in/kishan-n-gowda-47930b387/"
           target="_blank"
           class="contact-btn"
+          title="LinkedIn Profile"
         >
           <img src="images/linkedin.jpg" alt="LinkedIn" class="contact-icon" />
         </a>
@@ -171,6 +174,38 @@
 
       issueFlowCard.addEventListener("click", function () {
         alert("Project not yet finished!");
+      });
+
+      const sections = document.querySelectorAll(
+        'section, footer, div[id="contacts"]',
+      );
+      const navLinks = document.querySelectorAll("nav a");
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+
+        // Check if the user has scrolled to the bottom of the page
+        const atBottom =
+          window.innerHeight + window.scrollY >=
+          document.body.offsetHeight - 50;
+
+        if (atBottom) {
+          current = "contacts"; // Force Contacts highlight when at bottom of page
+        } else {
+          sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 150) {
+              current = section.getAttribute("id");
+            }
+          });
+        }
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add("active");
+          }
+        });
       });
     </script>
   </body>
