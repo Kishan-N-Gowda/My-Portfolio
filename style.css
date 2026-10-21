@@ -26,15 +26,36 @@ p {
 }
 
 header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 15px 30px;
-  align-items: center;
-  background-color: var(--bg-main);
   position: sticky;
   top: 0;
   z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: var(--bg-dark, #0f172a);
+  border-bottom: 1px solid var(--border-color, #1e293b);
+}
+
+/* Hide Hamburger Button on Desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.hamburger .bar {
+  width: 100%;
+  height: 3px;
+  background-color: var(--text-primary, #f8fafc);
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
 
 .logo {
@@ -80,6 +101,7 @@ nav a.active {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  margin-top: 15px;
   background-color: var(--accent-blue);
   color: #ffffff;
   transition:
@@ -298,16 +320,55 @@ p {
 
 /* Responsive Layout Adjustments */
 @media (max-width: 768px) {
-  body {
-    padding: 0 10px;
-  }
+
 
   /* Header navigation alignment */
-  header {
-    flex-direction: column;
-    gap: 10px;
-    padding: 15px 20px;
+  header{
+    background-color: var(--bg-main);
+    width: 100%;
+    left: 0;
   }
+
+
+  .hamburger {
+    display: flex; /* Show hamburger button on mobile */
+    margin-right: 50px;
+  }
+
+  header nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-main);
+    border-bottom: 1px solid var(--border-color, #1e293b);
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.3s ease,
+      padding 0.3s ease;
+  }
+
+  header nav.active {
+    max-height: 200px;
+    padding: 20px 0;
+  }
+
+  /* Hamburger Icon Transformation to 'X' when Open */
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+  }
+}s
 
   nav {
     display: flex;
@@ -331,11 +392,20 @@ p {
     line-height: 1.6;
   }
 
+  #about {
+    padding: 60px 0;
+  }
+
   /* Make sure project cards fill the mobile screen width properly */
   .project-card,
   .card {
     width: 100% !important;
     box-sizing: border-box;
+  }
+
+  .project-container {
+    display: flex;
+    flex-direction: column;
   }
 
   /* Text & section padding adjustments */

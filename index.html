@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    ś
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="style.css?v=1.1" />
@@ -11,7 +10,16 @@
   <body>
     <header>
       <div class="logo">Kishan</div>
-      <nav>
+
+      <!-- Hamburger Menu Button (visible on mobile only) -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Navigation Links -->
+      <nav id="nav-menu">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#contacts">Contacts</a>
@@ -208,6 +216,26 @@
           if (link.getAttribute("href") === `#${current}`) {
             link.classList.add("active");
           }
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburger = document.getElementById("hamburger");
+        const navMenu = document.getElementById("nav-menu");
+        const navLinks = document.querySelectorAll("header nav a");
+
+        // Toggle menu open/close on hamburger click
+        hamburger.addEventListener("click", () => {
+          hamburger.classList.toggle("active");
+          navMenu.classList.toggle("active");
+        });
+
+        // Automatically close mobile menu when a nav link is clicked
+        navLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+          });
         });
       });
     </script>
