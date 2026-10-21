@@ -61,7 +61,7 @@ nav a:hover {
 }
 
 nav a.active {
-  color: var(--accent-blue);
+  color: var(--accent-blue) !important;
   border-bottom: 2px solid var(--accent-blue) !important;
   padding-bottom: 4px;
 }
