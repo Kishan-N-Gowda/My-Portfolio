@@ -1,3 +1,8 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 :root {
   --bg-main: #0a0f1d;
   --bg-card: #141c2e;
@@ -29,6 +34,7 @@ header {
   background-color: var(--bg-main);
   position: sticky;
   top: 0;
+  z-index: 1000;
 }
 
 .logo {
@@ -52,6 +58,12 @@ nav a {
 
 nav a:hover {
   color: var(--accent-hover);
+}
+
+nav a.active {
+  color: var(--accent-blue);
+  border-bottom: 2px solid var(--accent-blue);
+  padding-bottom: 4px;
 }
 
 .hero {
@@ -235,7 +247,6 @@ p {
 .up {
   padding: 20px 0px;
 }
-
 #contacts {
   background-color: var(--bg-main);
   padding: 60px 20px;
@@ -247,33 +258,42 @@ p {
 .contact-links {
   display: flex;
   justify-content: center;
-  gap: 25px;
   align-items: center;
+  gap: 25px;
+  margin-top: 20px;
 }
 
 .contact-btn {
-  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
 }
 
 .contact-icon {
   width: 50px;
+  height: 50px;
+  object-fit: cover;
   border-radius: 50%;
-  transition: transform 0.2s ease;
-}
-
-.contact-icon:hover {
-  transform: scale(1.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .contact-icon-git {
-  width: 45px;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
   border-radius: 50%;
-  transition: transform 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
+.contact-icon:hover,
 .contact-icon-git:hover {
   transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
 }
 
 @media (max-width: 768px) {
