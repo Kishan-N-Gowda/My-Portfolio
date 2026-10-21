@@ -296,14 +296,38 @@ p {
   box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
 }
 
+/* Responsive Layout Adjustments */
 @media (max-width: 768px) {
-  .project-container {
-    display: flex;
+  /* Header navigation alignment */
+  header {
     flex-direction: column;
     gap: 10px;
+    padding: 15px 20px;
   }
 
-  #about {
-    padding: 60px 10px;
+  nav {
+    display: flex;
+    gap: 15px;
+  }
+
+  /* Grid layout adjustments for cards */
+  .projects-grid,
+  .grid {
+    grid-template-columns: 1fr !important; /* Stack project cards in a single column */
+    gap: 20px;
+  }
+
+  /* Text & section padding adjustments */
+  section,
+  #contacts {
+    padding: 40px 15px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
   }
 }
