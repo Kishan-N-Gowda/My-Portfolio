@@ -1,14 +1,23 @@
 :root{
-  --bg-color: #f8f9fa;
-  --bg-color2: #ffffff;
-  --heading-color: #212529;
-  --para-color : #495057;
+  --bg-main: #0a0f1d;
+  --bg-card: #141c2e;
+  --text-primary: #f1f5f9;
+  --text-secondary : #94a3b8;
+  --accent-blue: #3b82f6; 
+  --accent-hover: #2563eb;  
+  --border-color: #1e293b;
 }
 
-body{
-  background-color: var(--bg-color);
-  font-family: Arial, Helvetica, sans-serif;
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
+  padding: 0;
+}
+
+p {
+  color: var(--text-secondary);
 }
 
 header{
@@ -17,7 +26,7 @@ header{
   justify-content: space-between;
   padding: 15px 30px;
   align-items: center;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-main);
   position: sticky;
   top: 0;
 }
@@ -26,7 +35,7 @@ header{
   font-size: 25px;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
-  color: var(--heading-color);
+  color: var(--text-primary);
 }
 
 nav{
@@ -37,12 +46,12 @@ nav{
 
 nav a{
   text-decoration: none;
-  color: var(--heading-color);  
+  color: var(--text-primary);  
   transition: .2s;
 }
 
 nav a:hover{
-  color: #0066cc;
+  color: var(--accent-hover);
 }
 
 .hero{
@@ -50,40 +59,43 @@ nav a:hover{
   flex-direction: column;
   align-items: center;
   padding: 80px 20px; 
- background-color: var(--bg-color);
+ background-color: var(--bg-main);
 }
 
 .my-proj{
   border: none;
-  padding: 10px 15px;
+  padding: 12px 24px;
+  border-radius: 6px;    
   cursor: pointer;
   font-weight: bold;
-  background-color: #0066cc;
-  color: var(--bg-color);
-  transition: .3s;
+  background-color: var(--accent-blue);
+  color: #ffffff;        
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .my-proj:hover{
-  background-color: #004e9a;
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
 }
 
 h2{
   margin-top: 0;
-  color: var(--heading-color);
+  color: var(--text-primary);
 }
 
 p{
   margin-top: 0;
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--para-color);
+  font-size: 16px;      
+  font-weight: normal;  
+  color: var(--text-secondary);
   text-align: center;
+  line-height: 1.6;
 }
 
 .abt-container{
   max-width: 900px;
   margin: 0 auto;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-main);
   text-align: center;
 }
 
@@ -91,16 +103,16 @@ p{
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--bg-color2);
+  background-color: var(--bg-main);
   padding: 60px 100px;
 }
 
 #about h2{
-   color: var(--heading-color);
+   color: var(--text-primary);
 }
 
 #about p{
-    color: var(--para-color);
+    color: var(--text-secondary);
     padding: 10px 30px;
     text-align: center;
 }
@@ -122,27 +134,28 @@ p{
 .project-card{
   display: flex;
   flex-direction: column;
+  flex: 1;
   justify-content: center;
   align-items: center;
-  border: none;
-  padding: 10px 40px;
-  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 25px 20px;
+  margin: 15px 0;
   text-decoration: none;
-  margin-top: 10px;
   text-align: center;
-  background-color: var(--bg-color);
+  background-color: var(--bg-card);
   cursor: pointer;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s, box-shadow 0.3s;
-}
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;}
 
 .project-card h3{
-  color: var(--heading-color);
+  color: var(--text-primary);
+  margin-top: 0;
 }
 
 .project-card:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
 }
 
 .up{
@@ -150,7 +163,7 @@ p{
 }
 
 #contacts{
-  background-color: var(--bg-color2);
+  background-color: var(--bg-main);
   padding: 60px 20px;
   display: flex;
   flex-direction: column;
