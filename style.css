@@ -13,12 +13,20 @@ html {
   --border-color: #1e293b;
 }
 
+/* Global reset to prevent horizontal scrollbars */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   background-color: var(--bg-main);
   color: var(--text-primary);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
+  overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
 }
 
 p {
@@ -28,6 +36,8 @@ p {
 header {
   position: sticky;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   display: flex;
   justify-content: space-between;
@@ -35,6 +45,7 @@ header {
   padding: 15px 30px;
   background-color: var(--bg-dark, #0f172a);
   border-bottom: 1px solid var(--border-color, #1e293b);
+  width: 100%;
 }
 
 /* Hide Hamburger Button on Desktop */
@@ -193,9 +204,11 @@ p {
   margin: 0 auto;
 }
 
+/* DESKTOP: Project cards side-by-side */
 .project-container {
   display: flex;
-  gap: 10px;
+  gap: 20px;
+  width: 100%;
 }
 
 .project-card {
@@ -269,6 +282,7 @@ p {
 .up {
   padding: 20px 0px;
 }
+
 #contacts {
   background-color: var(--bg-main);
   padding: 60px 20px;
@@ -292,16 +306,7 @@ p {
   text-decoration: none;
 }
 
-.contact-icon {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 50%;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
+.contact-icon,
 .contact-icon-git {
   width: 50px;
   height: 50px;
@@ -318,21 +323,17 @@ p {
   box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
 }
 
-/* Responsive Layout Adjustments */
+/* ==========================================
+   MOBILE ONLY STYLES (Screen size <= 768px)
+   ========================================== */
 @media (max-width: 768px) {
-
-
-  /* Header navigation alignment */
-  header{
-    background-color: var(--bg-main);
-    width: 100%;
-    left: 0;
+  header {
+    padding: 15px 20px;
   }
 
-
   .hamburger {
-    display: flex; /* Show hamburger button on mobile */
-    margin-right: 50px;
+    display: flex;
+    margin-right: 0; /* Fixed right alignment overflow */
   }
 
   header nav {
@@ -358,7 +359,7 @@ p {
     padding: 20px 0;
   }
 
-  /* Hamburger Icon Transformation to 'X' when Open */
+  /* Hamburger transform animation */
   .hamburger.active .bar:nth-child(1) {
     transform: translateY(8.5px) rotate(45deg);
   }
@@ -368,47 +369,27 @@ p {
   .hamburger.active .bar:nth-child(3) {
     transform: translateY(-8.5px) rotate(-45deg);
   }
-}s
 
-  nav {
-    display: flex;
-    gap: 15px;
-  }
-
-  /* Grid layout adjustments for cards */
-  .projects-grid,
-  .grid,
-  section div[class*="grid"] {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    gap: 20px !important;
+  #about {
+    padding: 40px 20px;
   }
 
   #about p,
   section p {
-    max-width: 90% !important;
-    margin: 0 auto;
-    line-height: 1.6;
+    max-width: 100%;
+    padding: 0;
   }
 
-  #about {
-    padding: 60px 0;
-  }
-
-  /* Make sure project cards fill the mobile screen width properly */
-  .project-card,
-  .card {
-    width: 100% !important;
-    box-sizing: border-box;
-  }
-
+  /* MOBILE: Stack project cards vertically */
   .project-container {
-    display: flex;
     flex-direction: column;
+    gap: 15px;
   }
 
-  /* Text & section padding adjustments */
+  .project-card {
+    width: 100%;
+  }
+
   section,
   #contacts {
     padding: 40px 15px;
