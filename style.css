@@ -298,6 +298,10 @@ p {
 
 /* Responsive Layout Adjustments */
 @media (max-width: 768px) {
+  body {
+    padding: 0 10px;
+  }
+
   /* Header navigation alignment */
   header {
     flex-direction: column;
@@ -312,9 +316,26 @@ p {
 
   /* Grid layout adjustments for cards */
   .projects-grid,
-  .grid {
-    grid-template-columns: 1fr !important; /* Stack project cards in a single column */
-    gap: 20px;
+  .grid,
+  section div[class*="grid"] {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 20px !important;
+  }
+
+  #about p,
+  section p {
+    max-width: 90% !important;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Make sure project cards fill the mobile screen width properly */
+  .project-card,
+  .card {
+    width: 100% !important;
+    box-sizing: border-box;
   }
 
   /* Text & section padding adjustments */
