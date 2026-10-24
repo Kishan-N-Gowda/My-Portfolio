@@ -381,6 +381,10 @@ h2 {
   margin-top: 20px;
 }
 
+#modal-demo-link {
+  text-decoration: none !important;
+}
+
 .modal-git-btn {
   margin-top: 15px;
 }
