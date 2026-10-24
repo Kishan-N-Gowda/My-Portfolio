@@ -102,6 +102,7 @@ nav a.active {
   align-items: center;
   padding: 80px 20px;
   background-color: var(--bg-main);
+  text-align: center;
 }
 
 .my-proj {
