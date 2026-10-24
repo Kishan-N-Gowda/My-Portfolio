@@ -433,6 +433,10 @@ h2 {
     transform: translateY(-8.5px) rotate(-45deg);
   }
 
+  .hero {
+    text-align: center;
+  }
+
   #about {
     padding: 40px 20px;
   }
