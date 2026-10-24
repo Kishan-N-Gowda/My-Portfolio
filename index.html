@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="style.css?v=1.1" />
   </head>
   <body>
     <header>
       <div class="logo">Kishan</div>
 
-      <!-- Hamburger Menu Button (visible on mobile only) -->
+      <!-- Hamburger Menu Button -->
       <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
         <span class="bar"></span>
         <span class="bar"></span>
@@ -57,10 +56,14 @@
     <section id="projects">
       <h2>My Projects</h2>
       <div class="project-container">
-        <a
-          href="https://srisagardrivingschool.vercel.app/"
-          target="_blank"
+        <!-- Driving School Card -->
+        <div
           class="project-card"
+          data-title="Driving School"
+          data-tags="HTML,CSS,JavaScript,React,Tailwind CSS,Vite,AI-Studio"
+          data-desc="A modern, fully responsive landing page built for Sri Sagar Driving School to showcase course offerings, pricing packages, and contact information."
+          data-demo="https://srisagardrivingschool.vercel.app/"
+          data-github="https://github.com/Kishan-N-Gowda"
         >
           <h3>Driving School</h3>
           <p>A website designed for a local driving school.</p>
@@ -68,24 +71,41 @@
             <span>HTML/CSS/JS/React/Tailwind/Vite</span>
             <span class="ai-tag">AI-Studio</span>
           </div>
-        </a>
+        </div>
 
-        <div id="campus-nav-card" class="project-card">
+        <!-- CampusNav Card -->
+        <div
+          class="project-card"
+          data-title="CampusNav"
+          data-tags="HTML,CSS,JavaScript,React,Tailwind CSS,Vite,Supabase,Lovable,AI-Studio"
+          data-desc="An interactive campus navigation platform developed for Impact College of Engineering and Applied Sciences featuring a custom 3D map interface and location coordinate caching powered by a Supabase relational database."
+          data-demo="https://campus-nav-iceas.vercel.app/"
+          data-github="https://github.com/Kishan-N-Gowda"
+        >
           <h3>CampusNav</h3>
           <p>This is a campus navigation website</p>
           <div class="tech-tags">
             <span>HTML/CSS/JS/React/Tailwind/Vite</span>
-            <span class="ai-tag">Lovable</span>
+            <span class="lovable-tag">Lovable</span>
             <span class="ai-tag">AI-Studio</span>
           </div>
         </div>
       </div>
 
       <h2 class="up">Upcoming Project</h2>
-      <div id="issue-flow-ai" class="project-card">
+
+      <!-- Issue Flow AI Card -->
+      <div
+        class="project-card"
+        data-title="Issue Flow AI"
+        data-tags="Node.js,Express,AI / Smart Community,Upcoming"
+        data-desc="An AI-powered community issue reporting platform designed for residential apartments, corporate offices, schools, and colleges to streamline maintenance and resolution tracking."
+        data-demo="#"
+        data-github="https://github.com/Kishan-N-Gowda"
+      >
         <h3>Issue Flow AI</h3>
         <p>
-          A app where you can report issues. Used in apartments, offices,
+          An app where you can report issues. Used in apartments, offices,
           schools, colleges
         </p>
         <div class="tech-tags">
@@ -127,116 +147,157 @@
       </div>
     </section>
 
+    <!-- Single Project Details Modal Structure -->
+    <div id="project-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close" aria-label="Close modal">
+          &times;
+        </button>
+        <h2 id="modal-title">Project Title</h2>
+        <div id="modal-tags" class="tech-tags"></div>
+        <p id="modal-description">Project description goes here...</p>
+        <div class="modal-actions">
+          <a id="modal-demo-link" href="#" target="_blank" class="my-proj"
+            >Live Demo</a
+          >
+          <a
+            id="modal-github-link"
+            href="#"
+            target="_blank"
+            class="contact-btn modal-git-btn"
+          >
+            <img
+              src="images/github.png"
+              alt="GitHub"
+              class="contact-icon-git"
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript logic -->
     <script>
-      document.querySelectorAll("nav a").forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault(); // Stop the instant jump
-
-          const targetId = this.getAttribute("href");
-          const targetSection = document.querySelector(targetId);
-
-          if (targetSection) {
-            const targetPosition =
-              targetSection.getBoundingClientRect().top + window.pageYOffset;
-            const startPosition = window.pageYOffset;
-            const distance = targetPosition - startPosition;
-            const duration = 1200; // Duration in milliseconds (600ms = smooth & fast)
-            let startTime = null;
-
-            // Custom animation loop that bypasses browser restrictions
-            function animation(currentTime) {
-              if (startTime === null) startTime = currentTime;
-              const timeElapsed = currentTime - startTime;
-              const progress = Math.min(timeElapsed / duration, 1);
-
-              // Easing function for a natural slow-down effect at the end
-              const ease = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
-
-              window.scrollTo(0, startPosition + distance * ease(progress));
-
-              if (timeElapsed < duration) {
-                requestAnimationFrame(animation);
-              }
+      document.addEventListener("DOMContentLoaded", () => {
+        // Smooth scrolling for navigation
+        document.querySelectorAll("nav a").forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+              targetSection.scrollIntoView({ behavior: "smooth" });
             }
-
-            requestAnimationFrame(animation);
-          }
+          });
         });
-      });
 
-      const projectBtn = document.querySelector(".my-proj");
-
-      const projectsSection = document.querySelector("#projects");
-
-      projectBtn.addEventListener("click", function () {
-        window.scrollTo({
-          top: projectsSection.offsetTop,
-          behavior: "smooth",
-        });
-      });
-
-      const campusNavCard = document.querySelector("#campus-nav-card");
-
-      campusNavCard.addEventListener("click", function () {
-        window.open("https://campus-nav-iceas.vercel.app/", "_blank");
-      });
-
-      const issueFlowCard = document.querySelector("#issue-flow-ai");
-
-      issueFlowCard.addEventListener("click", function () {
-        alert("Project not yet finished!");
-      });
-
-      const sections = document.querySelectorAll(
-        'section, footer, div[id="contacts"]',
-      );
-      const navLinks = document.querySelectorAll("nav a");
-
-      window.addEventListener("scroll", () => {
-        let current = "";
-
-        // Check if the user has scrolled to the bottom of the page
-        const atBottom =
-          window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 50;
-
-        if (atBottom) {
-          current = "contacts"; // Force Contacts highlight when at bottom of page
-        } else {
-          sections.forEach((section) => {
-            const sectionTop = section.offsetTop;
-            if (window.scrollY >= sectionTop - 150) {
-              current = section.getAttribute("id");
-            }
+        // Hero button scroll to projects
+        const projectBtn = document.querySelector(".my-proj");
+        const projectsSection = document.querySelector("#projects");
+        if (projectBtn && projectsSection) {
+          projectBtn.addEventListener("click", () => {
+            projectsSection.scrollIntoView({ behavior: "smooth" });
           });
         }
 
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === `#${current}`) {
-            link.classList.add("active");
+        // Active Nav Highlighter on Scroll
+        const sections = document.querySelectorAll(
+          'section, footer, div[id="contacts"]',
+        );
+        const navLinks = document.querySelectorAll("nav a");
+
+        window.addEventListener("scroll", () => {
+          let current = "";
+          const atBottom =
+            window.innerHeight + window.scrollY >=
+            document.body.offsetHeight - 50;
+
+          if (atBottom) {
+            current = "contacts";
+          } else {
+            sections.forEach((section) => {
+              const sectionTop = section.offsetTop;
+              if (window.scrollY >= sectionTop - 150) {
+                current = section.getAttribute("id");
+              }
+            });
           }
-        });
-      });
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const hamburger = document.getElementById("hamburger");
-        const navMenu = document.getElementById("nav-menu");
-        const navLinks = document.querySelectorAll("header nav a");
-
-        // Toggle menu open/close on hamburger click
-        hamburger.addEventListener("click", () => {
-          hamburger.classList.toggle("active");
-          navMenu.classList.toggle("active");
-        });
-
-        // Automatically close mobile menu when a nav link is clicked
-        navLinks.forEach((link) => {
-          link.addEventListener("click", () => {
-            hamburger.classList.remove("active");
-            navMenu.classList.remove("active");
+          navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === `#${current}`) {
+              link.classList.add("active");
+            }
           });
         });
+
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById("hamburger");
+        const navMenu = document.getElementById("nav-menu");
+        const mobileNavLinks = document.querySelectorAll("header nav a");
+
+        if (hamburger && navMenu) {
+          hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+          });
+
+          mobileNavLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+              hamburger.classList.remove("active");
+              navMenu.classList.remove("active");
+            });
+          });
+        }
+
+        // Project Modal Popup Logic
+        const modal = document.getElementById("project-modal");
+        const modalTitle = document.getElementById("modal-title");
+        const modalTags = document.getElementById("modal-tags");
+        const modalDesc = document.getElementById("modal-description");
+        const modalDemo = document.getElementById("modal-demo-link");
+        const modalGithub = document.getElementById("modal-github-link");
+        const closeBtn = document.getElementById("modal-close");
+
+        document.querySelectorAll(".project-card").forEach((card) => {
+          card.addEventListener("click", () => {
+            const title = card.getAttribute("data-title");
+            const tags = card.getAttribute("data-tags")?.split(",") || [];
+            const desc = card.getAttribute("data-desc");
+            const demo = card.getAttribute("data-demo");
+            const github = card.getAttribute("data-github");
+
+            modalTitle.textContent = title;
+            modalDesc.textContent = desc;
+
+            if (!demo || demo === "#") {
+              modalDemo.style.display = "none";
+            } else {
+              modalDemo.style.display = "inline-block";
+              modalDemo.href = demo;
+            }
+
+            modalGithub.href = github || "#";
+
+            modalTags.innerHTML = "";
+            tags.forEach((tag) => {
+              const span = document.createElement("span");
+              span.textContent = tag.trim();
+              modalTags.appendChild(span);
+            });
+
+            modal.classList.add("active");
+          });
+        });
+
+        if (closeBtn && modal) {
+          closeBtn.addEventListener("click", () =>
+            modal.classList.remove("active"),
+          );
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.classList.remove("active");
+          });
+        }
       });
     </script>
   </body>
